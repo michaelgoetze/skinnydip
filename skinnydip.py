@@ -92,7 +92,8 @@ OLD_INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}" + \
                    r"G1 [^E].*\n)(?:.*\n){1,20}(?P<dip_pos>G1 E-).*\n" + \
                    r"(.*\n){1,5}(?P<new_tool>T\d)"
 
-INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>G1 [^E].*\n)(?:.*\n){1,20}(?P<dip_pos>G1.*[^E].*\n)(?:.*\n){1,5}G4 S.*\n(?P<new_tool>T\d)\nG4 S.*\n"
+OLD1_INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>G1 [^E].*\n)(?:.*\n){1,20}(?P<dip_pos>G1.*[^E].*\n)(?:.*\n){1,5}G4 S.*\n(?P<new_tool>T\d)\nG4 S.*\n"
+INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>G1 [^E].*\n)(?:.*\n){1,20}?(?P<dip_pos>G1[^E\n]*\n)(?:.*\n){0,20}?G4 S.*\n(?:.*\n){0,5}(?P<new_tool>T\d)\n(?:.*\n){0,20}G4 S.*\n"
 TEMP_BEEP = ["M300 S3038 P155 ;temp_beep\n", "M300 S2550 P75 ;temp_beep\n"]
 
 CONFIGSTRING_REGEX = r"(SKINNYDIP CONFIGURATION START.?)(?P<configstring>.*)"
@@ -106,7 +107,7 @@ WAIT_FOR_TEMP_REGEX = r"(?P<wait_for_temp>^G1 E-\d\d.*\n)((^G1 E-.*$\n)|(M73.*\n
 
 
 SETTINGS_REGEX = r"(?P<previous_tool>^T[01234].*$)(?P<otherstuff>(.*\n)" + \
-                 r"{10,250}?); SKINNYDIP CONFIGURATION START.*\n" + \
+                 r"{3,250}?); SKINNYDIP CONFIGURATION START.*\n" + \
                  r"(?P<parameters>(; .*\n){1,11});.?SKINNYDIP " + \
                  r"CONFIGURATION END"
 
